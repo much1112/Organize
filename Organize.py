@@ -2,6 +2,7 @@ import os
 import shutil
 import json
 import datetime
+import Upload
 
 json_path = r"O:\Download\Organize.json"
 
@@ -28,11 +29,14 @@ def Rename_date(category, types):
         if is_not_correct_type:
             continue
 
-        creation_date = datetime.datetime.fromtimestamp(os.path.getctime(file)).date()
-        new_path = f"{creation_date}{os.path.splitext(file)[1]}"
+        creation_date = datetime.datetime.fromtimestamp(os.path.getctime(file))
+        unique_id = creation_date.strftime("%y%m%d-%H%M")
+        new_path = f"{unique_id}{os.path.splitext(file)[1]}"
         os.rename(file, new_path)
 
 
 for folder, config in file_to_folder.items():
     if config.get("Rename_date"):
         Rename_date(folder, config["Types"])
+
+Upload.main()
