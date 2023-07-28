@@ -88,21 +88,12 @@ def is_file_content_same(remote_file, local_file_path):
 def main():
     script_directory = os.path.dirname(os.path.abspath(__file__))
     os.chdir(script_directory)
-
     gauth = GoogleAuth()
-    credentials_file = "credentials.json"
-    if os.path.exists(credentials_file):
-        gauth.LoadCredentialsFile(credentials_file)
-
-    if gauth.credentials is None:
-        gauth.LocalWebserverAuth()
-        gauth.SaveCredentialsFile(credentials_file)
-    elif gauth.access_token_expired:
-        gauth.Refresh()
-    else:
-        gauth.Authorize()
-
+    gauth.LoadCredentialsFile(credentials_file="credentials.json")
     drive = GoogleDrive(gauth)
 
     local_path = r"O:\Download"
     upload_files(drive, local_path)
+
+
+main()
