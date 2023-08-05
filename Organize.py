@@ -12,4 +12,3 @@ base_dir = "O:\Download"
 
 Locate.main(base_dir, configJson)
 Rename.main(base_dir, configJson)
-Upload.main()

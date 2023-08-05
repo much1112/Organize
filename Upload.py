@@ -89,11 +89,13 @@ def main():
     script_directory = os.path.dirname(os.path.abspath(__file__))
     os.chdir(script_directory)
     gauth = GoogleAuth()
-    gauth.LoadCredentialsFile(credentials_file="credentials.json")
+    gauth.LoadCredentialsFile("credentials.json")
+    gauth.SaveCredentialsFile("credentials.json")
     drive = GoogleDrive(gauth)
 
     local_path = r"O:\Download"
     upload_files(drive, local_path)
 
 
-main()
+if __name__ == "__main__":
+    main()
